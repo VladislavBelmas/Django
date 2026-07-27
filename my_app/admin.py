@@ -8,7 +8,7 @@ class CategoryAdmin(admin.ModelAdmin):
 
 @admin.register(Task)
 class TaskAdmin(admin.ModelAdmin):
-    list_display = ('title', 'description', 'get_categories', 'status', 'deadline')
+    list_display = ('title', 'description', 'status', 'deadline')
     search_fields = ('title', 'categories__name', 'status', 'deadline')
     list_filter = ('categories', 'status', 'deadline')
     ordering = ('deadline', 'created_at')
