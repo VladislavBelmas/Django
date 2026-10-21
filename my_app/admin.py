@@ -42,7 +42,7 @@ class SubTaskInLine(admin.StackedInline):
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
-    list_per_page = 3
+    list_per_page = 5
 
 
 @admin.register(Task)
@@ -52,7 +52,7 @@ class TaskAdmin(admin.ModelAdmin):
     list_filter = ('status', 'priority', 'project', 'created_at', 'due_date', 'assignee')
     ordering = ('due_date', 'created_at')
     fields = ('title', 'description', 'categories', 'status', 'due_date')
-    list_per_page = 2
+    list_per_page = 5
 
     inlines = (SubTaskInLine,)
 
@@ -73,7 +73,7 @@ class SubtaskAdmin(admin.ModelAdmin):
     list_filter = ('task', 'status', 'due_date')
     ordering = ('due_date', 'created_at')
     fields = ('title', 'description', 'task', 'status', 'due_date')
-    list_per_page = 2
+    list_per_page = 5
 
     actions = (status_close,)
 
