@@ -86,7 +86,7 @@ class Task(models.Model):
     tags = models.ManyToManyField(Tag, related_name='tasks', blank=True)
     due_date = models.DateTimeField(help_text='Дата и время дедлайнa')
     assignee = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL,
-                                 null=True, blank=True, related_name='tasks')
+                                 null=True, blank=True, related_name='tasks', verbose_name='Assignee')
 
     class Meta:
         db_table = 'task_manager_task'

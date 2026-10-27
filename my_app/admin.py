@@ -48,10 +48,10 @@ class CategoryAdmin(admin.ModelAdmin):
 @admin.register(Task)
 class TaskAdmin(admin.ModelAdmin):
     list_display = ('short_title', 'project', 'status', 'priority', 'created_at', 'updated_at', 'due_date', 'assignee')
-    search_fields = ('title', 'categories__name')
+    search_fields = ('title', 'categories__name', 'assignee__username')
     list_filter = ('status', 'priority', 'project', 'created_at', 'due_date', 'assignee')
     ordering = ('due_date', 'created_at')
-    fields = ('title', 'description', 'categories', 'status', 'due_date')
+    fields = ('title', 'description', 'categories', 'status', 'due_date', 'assignee')
     list_per_page = 5
 
     inlines = (SubTaskInLine,)
