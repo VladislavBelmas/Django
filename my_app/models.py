@@ -106,7 +106,7 @@ class Task(models.Model):
 class Subtask(models.Model):
     title = models.CharField(max_length=100, unique_for_date='due_date', help_text='Название подзадачи', unique=True)
     description = models.TextField(blank=True, null=True, help_text='Описание подзадачи')
-    task = models.ForeignKey(Task, on_delete=models.CASCADE, help_text='Основная задача')
+    task = models.ForeignKey(Task, on_delete=models.CASCADE, help_text='Основная задача', related_name='subtasks')
     status = models.CharField(max_length=20, choices=Task.Status.choices,
                               default=Task.Status.NEW, help_text='Статус задачи')
     due_date = models.DateTimeField(help_text='Дата и время дедлайнa')
