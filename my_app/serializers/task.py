@@ -1,7 +1,7 @@
 from django.utils import timezone
 from rest_framework import serializers
 from ..models import Task
-from .subtask import SubtaskSerializer
+from .subtask import SubTaskSerializer
 
 
 class TaskCreateSerializer(serializers.ModelSerializer):
@@ -16,7 +16,7 @@ class TaskCreateSerializer(serializers.ModelSerializer):
 
 
 class TaskDetailsSerializer(serializers.ModelSerializer):
-    subtasks = SubtaskSerializer(many=True, read_only=True)
+    subtasks = SubTaskSerializer(many=True, read_only=True)
 
     class Meta:
         model = Task

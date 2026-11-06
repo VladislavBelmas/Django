@@ -103,7 +103,7 @@ class Task(models.Model):
         return self.title
 
 
-class Subtask(models.Model):
+class SubTask(models.Model):
     title = models.CharField(max_length=100, unique_for_date='due_date', help_text='Название подзадачи', unique=True)
     description = models.TextField(blank=True, null=True, help_text='Описание подзадачи')
     task = models.ForeignKey(Task, on_delete=models.CASCADE, help_text='Основная задача', related_name='subtasks')
@@ -116,8 +116,8 @@ class Subtask(models.Model):
     class Meta:
         db_table = 'task_manager_subtask'
         ordering = ['-created_at']
-        verbose_name = 'Subtask'
-        verbose_name_plural = 'Subtasks'
+        verbose_name = 'SubTask'
+        verbose_name_plural = 'SubTasks'
 
     def __str__(self):
         return f"{self.title} (Подзадача для: {self.task.title})"

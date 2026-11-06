@@ -4,7 +4,7 @@ from django.db.models.functions import Replace
 from django.template.defaultfilters import truncatechars
 from django.utils import timezone
 
-from .models import Category, Task, Subtask, Project, Tag, ProjectFile
+from .models import Category, Task, SubTask, Project, Tag, ProjectFile
 
 
 @admin.action(description='Spaces to underscores')
@@ -35,7 +35,7 @@ def priority_update_high(modeladmin, request, queryset):
 
 
 class SubTaskInLine(admin.StackedInline):
-    model = Subtask
+    model = SubTask
     extra = 1
 
 
@@ -66,8 +66,8 @@ class TaskAdmin(admin.ModelAdmin):
         return truncatechars(obj.title, 10)
 
 
-@admin.register(Subtask)
-class SubtaskAdmin(admin.ModelAdmin):
+@admin.register(SubTask)
+class SubTaskAdmin(admin.ModelAdmin):
     list_display = ('title', 'description', 'task', 'status', 'due_date')
     search_fields = ('task__title', 'status', 'due_date')
     list_filter = ('task', 'status', 'due_date')

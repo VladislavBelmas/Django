@@ -1,15 +1,15 @@
 from rest_framework import serializers
-from ..models import Subtask
+from ..models import SubTask
 
 
 class SubTaskCreateSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Subtask
+        model = SubTask
         fields = '__all__'
         read_only_fields = ['created_at']
 
 
-class SubtaskSerializer(serializers.ModelSerializer):
+class SubTaskSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Subtask
+        model = SubTask
         exclude = ['task']

@@ -1,4 +1,5 @@
 from django.db.models import Count, Q
+from django.db.models.functions import ExtractWeekDay
 from django.utils import timezone
 from rest_framework import status
 from rest_framework.decorators import api_view
@@ -31,11 +32,21 @@ def task_get(request: Request, pk):
 
 @api_view(['GET'])
 def tasks_get(request: Request):
-    task = Task.objects.all()
-    if not task.exists():
+    week_day = request.query_params.get('week_day')
+    tasks = Task.objects.all()
+
+    if week_day:
+        try:
+            week_day = int(week_day)
+            tasks = tasks.annotate(week_day=ExtractWeekDay('due_date')).filter(week_day=week_day)
+        except ValueError:
+            return Response({'error': 'Week day must be a number (1-7, 1-Sunday)'},
+                            status=status.HTTP_400_BAD_REQUEST
+                            )
+    if not tasks.exists():
         return Response({'error': 'Tasks not found'}, status=status.HTTP_404_NOT_FOUND)
 
-    serializer = TaskDetailsSerializer(task, many=True)
+    serializer = TaskDetailsSerializer(tasks, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
 
 
